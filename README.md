@@ -482,17 +482,17 @@ this is my first repository
         </p>
       </div>
       <div class="contact-items reveal">
-        <a href="mailto:waleed@email.com" class="contact-item">
+        <a href="mailto:waleedyounus815@gmail.com" class="contact-item">
           <div>
             <div class="contact-item-label">Email</div>
-            <div class="contact-item-value">waleed@email.com</div>
+            <div class="contact-item-value">waleedyounus815@gmail.com</div>
           </div>
           <span class="contact-arrow">→</span>
         </a>
-        <a href="https://github.com/waleed" target="_blank" class="contact-item">
+        <a href="https://github.com/waleedyounus815" target="_blank" class="contact-item">
           <div>
             <div class="contact-item-label">GitHub</div>
-            <div class="contact-item-value">github.com/waleed</div>
+            <div class="contact-item-value">github.com/waleedyounus815</div>
           </div>
           <span class="contact-arrow">→</span>
         </a>
