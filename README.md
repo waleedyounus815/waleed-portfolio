@@ -1,327 +1,295 @@
-# waleed-portfolio
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Waleed — Frontend & Flutter Dev</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #f5f2ee;
-      --ink: #1a1814;
-      --muted: #7a7570;
-      --line: #dedad5;
-      --accent: #c9602a;
-      --accent-light: #f0e6de;
-      --white: #fdfcfb;
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --card: #1c1c1c;
+      --border: #2a2a2a;
+      --accent: #e8ff47;
+      --accent2: #47c8ff;
+      --text: #f0f0f0;
+      --muted: #666;
+      --muted2: #444;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
-      color: var(--ink);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 400;
-      line-height: 1.6;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.25rem 4rem;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.1rem 3rem;
       display: flex; justify-content: space-between; align-items: center;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
     .nav-logo {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       font-style: italic;
-      font-size: 1.3rem;
-      color: var(--ink);
-      letter-spacing: 0.01em;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: -0.01em;
     }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       min-height: 100vh;
-      padding: 10rem 4rem 5rem;
+      padding: 9rem 3rem 5rem;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 380px;
+      gap: 3rem;
       align-items: center;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 0.75rem;
-      margin-bottom: 2rem;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px; height: 1px;
-      background: var(--accent);
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 1.75rem;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 460px;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-cta { display: flex; gap: 1rem; align-items: center; }
-
-    .btn {
-      padding: 0.78rem 1.8rem;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-    .btn-solid {
-      background: var(--ink);
-      color: var(--white);
-      border: 1px solid var(--ink);
-    }
-    .btn-solid:hover { background: var(--accent); border-color: var(--accent); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--line);
-    }
-    .btn-ghost:hover { border-color: var(--ink); }
-
-    /* Hero right — stat cards */
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-    .stat-card {
-      background: var(--white);
-      padding: 1.75rem 2rem;
-      transition: background 0.2s;
-    }
-    .stat-card:hover { background: var(--accent-light); }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-    .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; letter-spacing: 0.04em; }
-
-    /* ── SECTIONS ── */
-    .section {
-      padding: 6rem 4rem;
-      border-bottom: 1px solid var(--line);
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 3.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .section-num {
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(232,255,71,0.08);
+      border: 1px solid rgba(232,255,71,0.2);
+      border-radius: 100px;
       font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--accent);
+      margin-bottom: 2rem;
     }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--ink);
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
     }
 
-    /* ── SKILLS ── */
-    .skills-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 5.5vw, 5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
     }
-    .skill-row {
-      background: var(--white);
-      padding: 1.5rem 1.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    h1 span { color: var(--accent); font-style: italic; }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta { display: flex; gap: 0.875rem; }
+    .btn {
+      padding: 0.75rem 1.6rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-solid { background: var(--accent); color: #000; border: 1px solid var(--accent); }
+    .btn-solid:hover { background: #d4eb00; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--muted); transform: translateY(-2px); }
+
+    /* Hero right panel */
+    .hero-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .panel-item {
+      padding: 1.4rem 1.75rem;
+      border-bottom: 1px solid var(--border);
       transition: background 0.2s;
     }
-    .skill-row:hover { background: var(--accent-light); }
-    .skill-name-text {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .skill-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
-    .skill-pct {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
+    .panel-item:last-child { border-bottom: none; }
+    .panel-item:hover { background: #222; }
+    .panel-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .panel-label { font-size: 0.75rem; color: var(--muted); font-weight: 400; letter-spacing: 0.04em; }
+
+    /* SECTIONS */
+    .section {
+      padding: 5rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
     }
 
-    /* ── PROJECTS ── */
-    .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-    .project-row {
-      background: var(--white);
-      padding: 2rem 2.5rem;
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .sec-num { font-size: 0.7rem; color: var(--muted2); letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* SKILLS */
+    .skills-grid {
       display: grid;
-      grid-template-columns: 2rem 1fr auto;
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .skill-card {
+      background: var(--card);
+      padding: 1.5rem;
+      transition: background 0.2s;
+    }
+    .skill-card:hover { background: #222; }
+    .skill-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; }
+    .skill-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .skill-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .skill-pct { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+    .skill-bar { height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 1px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .skill-card.vis .skill-fill { transform: scaleX(1); }
+
+    /* PROJECTS */
+    .projects-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .project-card {
+      background: var(--card);
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
       align-items: start;
       transition: background 0.2s;
-      cursor: default;
     }
-    .project-row:hover { background: var(--accent-light); }
-    .project-index {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding-top: 0.2rem;
-    }
-    .project-title-text {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.4rem;
-    }
-    .project-desc-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-    .project-tags-wrap { display: flex; gap: 0.4rem; flex-wrap: wrap; padding-top: 0.2rem; }
+    .project-card:hover { background: #1f1f1f; }
+    .p-num { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.8rem; color: var(--muted2); padding-top: 0.15rem; }
+    .p-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .p-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+    .p-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
     .tag {
-      padding: 0.2rem 0.65rem;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 2px;
-      font-size: 0.68rem;
+      padding: 0.22rem 0.65rem;
+      background: rgba(232,255,71,0.07);
+      border: 1px solid rgba(232,255,71,0.15);
+      border-radius: 4px;
+      font-size: 0.65rem;
       font-weight: 500;
+      color: var(--accent);
       letter-spacing: 0.04em;
-      color: var(--muted);
       white-space: nowrap;
     }
 
-    /* ── CONTACT ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .contact-tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+    /* CONTACT */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
       font-style: italic;
-      color: var(--ink);
+      color: var(--text);
       line-height: 1.4;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
-    .contact-body { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+    .contact-body { font-size: 0.88rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
 
-    .contact-items { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-    .contact-item {
-      background: var(--white);
-      padding: 1.2rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .contact-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .contact-row {
+      background: var(--card);
+      padding: 1.1rem 1.4rem;
+      display: flex; justify-content: space-between; align-items: center;
       text-decoration: none;
       transition: background 0.2s;
     }
-    .contact-item:hover { background: var(--accent-light); }
-    .contact-item-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; }
-    .contact-item-value { font-size: 0.88rem; color: var(--ink); font-weight: 500; }
-    .contact-arrow { color: var(--accent); font-size: 1rem; }
+    .contact-row:hover { background: #222; }
+    .c-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted2); font-weight: 500; margin-bottom: 0.2rem; }
+    .c-val { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+    .c-arrow { color: var(--accent); font-size: 1rem; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
-      padding: 1.5rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.72rem; color: var(--muted2);
+      max-width: 1200px; margin: 0 auto;
     }
+    footer span:last-child { color: var(--accent); }
 
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.vis { opacity: 1; transform: none; }
 
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
+      nav { padding: 1rem 1.25rem; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
-      .section { padding: 4rem 1.5rem; }
-      .skills-list { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 0.4rem; text-align: center; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.25rem 3rem; }
+      .section { padding: 3.5rem 1.25rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; padding: 1.25rem; }
+      .project-card { grid-template-columns: auto 1fr; }
+      .p-tags { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">Waleed</div>
     <ul class="nav-links">
@@ -333,131 +301,105 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-content">
-      <div class="hero-eyebrow">Frontend &amp; Flutter Developer</div>
-      <h1>Building interfaces<br>that <em>feel right.</em></h1>
+    <div>
+      <div class="hero-tag">Available for work</div>
+      <h1>Frontend &<br><span>Flutter</span><br>Developer</h1>
       <p class="hero-desc">
-        Hi, I'm <strong>Waleed</strong> — I craft clean, responsive web experiences
-        and cross-platform Flutter apps with a sharp eye for detail.
+        Hi, I'm <strong>Waleed</strong> — I build clean, fast web interfaces
+        and cross-platform Flutter applications, with live deployments on the
+        <strong>Google Play Store</strong>. Sharp eye for detail, smooth delivery.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-solid">View Projects</a>
-        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
       </div>
     </div>
 
-    <div class="hero-right">
-      <div class="stat-card">
-        <div class="stat-num">2+</div>
-        <div class="stat-label">Years of Experience</div>
+    <div class="hero-panel">
+      <div class="panel-item">
+        <div class="panel-num">2+</div>
+        <div class="panel-label">Years Experience</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Projects Completed</div>
+      <div class="panel-item">
+        <div class="panel-num">4</div>
+        <div class="panel-label">Projects Completed</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">Flutter</div>
-        <div class="stat-label">Primary Specialization</div>
+      <div class="panel-item">
+        <div class="panel-num">Flutter</div>
+        <div class="panel-label">Primary Stack</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">Open</div>
-        <div class="stat-label">Available for Work</div>
+      <div class="panel-item">
+        <div class="panel-num" style="font-size:1.1rem;padding-top:0.3rem;">Open to Work</div>
+        <div class="panel-label">Freelance & Full-time</div>
       </div>
     </div>
   </div>
 
   <!-- SKILLS -->
   <div class="section" id="skills">
-    <div class="section-header reveal">
+    <div class="sec-header reveal">
       <h2>Skills</h2>
-      <span class="section-num">01 / 03</span>
+      <span class="sec-num">01 / 03</span>
     </div>
-    <div class="skills-list">
-      <div class="skill-row reveal">
-        <div>
-          <div class="skill-name-text">Flutter</div>
-          <div class="skill-sub">Cross-platform mobile apps</div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-top">
+          <div><div class="skill-name">Flutter</div><div class="skill-sub">Cross-platform apps</div></div>
+          <div class="skill-pct">90%</div>
         </div>
-        <div class="skill-pct">90%</div>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
       </div>
-      <div class="skill-row reveal">
-        <div>
-          <div class="skill-name-text">Dart</div>
-          <div class="skill-sub">State management, logic</div>
+      <div class="skill-card reveal">
+        <div class="skill-top">
+          <div><div class="skill-name">Dart</div><div class="skill-sub">State & logic</div></div>
+          <div class="skill-pct">85%</div>
         </div>
-        <div class="skill-pct">85%</div>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
       </div>
-      <div class="skill-row reveal">
-        <div>
-          <div class="skill-name-text">HTML / CSS</div>
-          <div class="skill-sub">Responsive & semantic</div>
-        </div>
-        <div class="skill-pct">90%</div>
-      </div>
-      <div class="skill-row reveal">
-        <div>
-          <div class="skill-name-text">JavaScript</div>
-          <div class="skill-sub">ES6+, DOM, APIs</div>
-        </div>
-        <div class="skill-pct">80%</div>
-      </div>
-      <div class="skill-row reveal">
-        <div>
-          <div class="skill-name-text">React</div>
-          <div class="skill-sub">Components & hooks</div>
-        </div>
-        <div class="skill-pct">75%</div>
-      </div>
-      <div class="skill-row reveal">
-        <div>
-          <div class="skill-name-text">UI / UX</div>
-          <div class="skill-sub">Figma, prototyping</div>
-        </div>
-        <div class="skill-pct">70%</div>
-      </div>
+
     </div>
   </div>
 
   <!-- PROJECTS -->
   <div class="section" id="projects">
-    <div class="section-header reveal">
+    <div class="sec-header reveal">
       <h2>Projects</h2>
-      <span class="section-num">02 / 03</span>
+      <span class="sec-num">02 / 03</span>
     </div>
-    <div class="projects-list">
-      <div class="project-row reveal">
-        <div class="project-index">01</div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="p-num">01</div>
         <div>
-          <div class="project-title-text">E-Commerce App</div>
-          <div class="project-desc-text">Full Flutter mobile app with product listings, cart, Firebase auth, and smooth page transitions. Deployed on Android & iOS.</div>
+          <div class="p-title">E-Commerce App</div>
+          <div class="p-desc">Full Flutter mobile app — product listings, cart, Firebase auth, smooth transitions. Live on Android & iOS.</div>
         </div>
-        <div class="project-tags-wrap">
+        <div class="p-tags">
           <span class="tag">Flutter</span>
           <span class="tag">Firebase</span>
           <span class="tag">Dart</span>
         </div>
       </div>
-      <div class="project-row reveal">
-        <div class="project-index">02</div>
+      <div class="project-card reveal">
+        <div class="p-num">02</div>
         <div>
-          <div class="project-title-text">Portfolio Website</div>
-          <div class="project-desc-text">Personal portfolio with clean typography, scroll animations, and fully responsive layout. Built with pure HTML, CSS, and JS.</div>
+          <div class="p-title">Portfolio Website</div>
+          <div class="p-desc">Personal portfolio with scroll animations, dark theme, and fully responsive layout. Pure HTML, CSS & JS.</div>
         </div>
-        <div class="project-tags-wrap">
+        <div class="p-tags">
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
-          <span class="tag">JS</span>
+          <span class="tag">JavaScript</span>
         </div>
       </div>
-      <div class="project-row reveal">
-        <div class="project-index">03</div>
+      <div class="project-card reveal">
+        <div class="p-num">03</div>
         <div>
-          <div class="project-title-text">Task Manager App</div>
-          <div class="project-desc-text">Flutter app with local Hive DB storage, priority tags, dark mode, and reminder notifications. Clean minimal UI.</div>
+          <div class="p-title">Task Manager App</div>
+          <div class="p-desc">Flutter app with Hive local storage, priority tags, reminders, and dark mode. Minimal clean UI.</div>
         </div>
-        <div class="project-tags-wrap">
+        <div class="p-tags">
           <span class="tag">Flutter</span>
-          <span class="tag">Hive</span>
+          <span class="tag">Hive DB</span>
           <span class="tag">Provider</span>
         </div>
       </div>
@@ -466,58 +408,55 @@
 
   <!-- CONTACT -->
   <div class="section" id="contact">
-    <div class="section-header reveal">
+    <div class="sec-header reveal">
       <h2>Contact</h2>
-      <span class="section-num">03 / 03</span>
+      <span class="sec-num">03 / 03</span>
     </div>
-    <div class="contact-grid">
+    <div class="contact-wrap">
       <div class="reveal">
-        <p class="contact-tagline">"Let's build something worth using."</p>
-        <p class="contact-body">
-          Open to freelance projects, full-time roles, and collaborations.
-          Whether it's a Flutter app or a polished website — reach out and I'll
-          reply within 24 hours.
-        </p>
+        <p class="contact-heading">"Let's build something worth using."</p>
+        <p class="contact-body">Open to freelance projects, full-time roles, and collaborations. Flutter app or a sleek website — reach out and I'll reply within 24 hours.</p>
       </div>
-      <div class="contact-items reveal">
-        <a href="mailto:waleedyounus815@gmail.com" class="contact-item">
+      <div class="contact-list reveal">
+        <a href="mailto:waleedyounus815@gmail.com" class="contact-row">
           <div>
-            <div class="contact-item-label">Email</div>
-            <div class="contact-item-value">waleedyounus815@gmail.com</div>
+            <div class="c-label">Email</div>
+            <div class="c-val">waleedyounus815@gmail.com</div>
           </div>
-          <span class="contact-arrow">→</span>
+          <span class="c-arrow">→</span>
         </a>
-        <a href="https://github.com/waleedyounus815" target="_blank" class="contact-item">
+        <a href="https://github.com/waleedyounus815" target="_blank" class="contact-row">
           <div>
-            <div class="contact-item-label">GitHub</div>
-            <div class="contact-item-value">github.com/waleedyounus815</div>
+            <div class="c-label">GitHub</div>
+            <div class="c-val">github.com/waleedyounus815</div>
           </div>
-          <span class="contact-arrow">→</span>
+          <span class="c-arrow">→</span>
         </a>
-        <a href="https://linkedin.com/in/waleed" target="_blank" class="contact-item">
+        <a href="https://linkedin.com/in/waleed" target="_blank" class="contact-row">
           <div>
-            <div class="contact-item-label">LinkedIn</div>
-            <div class="contact-item-value">linkedin.com/in/waleed</div>
+            <div class="c-label">LinkedIn</div>
+            <div class="c-val">linkedin.com/in/waleed</div>
           </div>
-          <span class="contact-arrow">→</span>
+          <span class="c-arrow">→</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
-    <span>© 2025 Waleed</span>
-    <span>Frontend &amp; Flutter Developer</span>
+    <span>© 2025 Waleed Younus</span>
+    <span>Frontend & Flutter Developer</span>
   </footer>
 
   <script>
-    const observer = new IntersectionObserver(entries => {
+    const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
+        if (e.isIntersecting) {
+          e.target.classList.add('vis');
+        }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .skill-card').forEach(el => io.observe(el));
   </script>
 
 </body>
