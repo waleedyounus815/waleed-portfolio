@@ -1,5 +1,4 @@
 # waleed-portfolio
-[index (2).html](https://github.com/user-attachments/files/28194461/index.2.html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
